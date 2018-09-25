@@ -8,17 +8,22 @@
 
 #import "ViewController.h"
 #import "OpenGLView.h"
+#import "OpenGLKView.h"
 
 @interface ViewController ()
 @property (nonatomic, strong) OpenGLView *glView;
+@property (nonatomic, strong) OpenGLKView *glkView;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.glView = [[OpenGLView alloc] initWithFrame:CGRectMake(50, 50, 300, 300)];
+    self.glView = [[OpenGLView alloc] initWithFrame:CGRectMake(50, 50, 100, 100)];
     [self.view addSubview:self.glView];
+    
+    self.glkView = [[OpenGLKView alloc] initWithFrame:CGRectMake(50, 170, 30, 30)];
+    [self.view addSubview:self.glkView];
 }
 
 @end
