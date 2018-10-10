@@ -8,8 +8,8 @@
 
     <com.example.david.a0x00.OpenGLSurfaceView
         android:id="@+id/OpenGLSurfaceView"
-        android:layout_width="296dp"
-        android:layout_height="299dp"
+        android:layout_width="306dp"
+        android:layout_height="383dp"
         android:layout_marginBottom="106dp"
         android:layout_marginEnd="44dp"
         android:layout_marginStart="44dp"
@@ -18,4 +18,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

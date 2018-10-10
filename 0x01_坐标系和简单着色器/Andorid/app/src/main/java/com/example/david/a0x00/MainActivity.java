@@ -4,6 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity implements OpenGLSurfaceView.GLViewListener {
+    static {
+        //通过静态代码块加载so库
+        System.loadLibrary("native-lib");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements OpenGLSurfaceView
 
     @Override
     public void onViewDidCreateGlResource(OpenGLSurfaceView view) {
-
+        // 需要在非主线程中处理
+        view.renderler = new OpenGLRender();
     }
 }

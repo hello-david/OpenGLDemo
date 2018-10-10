@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Size;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -20,6 +21,7 @@ public class OpenGLSurfaceView extends SurfaceView implements SurfaceHolder.Call
     private OpenGLContext mGLContext = null;
     private HandlerThread mGLViewHandlerThread = null;
     private android.os.Handler mRenderHandler = null;
+    public OpenGLRender renderler = null;
 
     // Android中的代理对象
     public GLViewListener listener = null;
@@ -49,30 +51,15 @@ public class OpenGLSurfaceView extends SurfaceView implements SurfaceHolder.Call
         commonInit();
     }
 
-    // SurfaceView Life Cycle
-    @Override
-    public void surfaceCreated(SurfaceHolder holder) {
-        Message msg = Message.obtain();
-        msg.what = kOnSurfaceCreated;
-        mRenderHandler.sendMessage(msg);
-    }
-
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        Message msg = Message.obtain();
-        msg.what = kOnSurfaceLayout;
-        mRenderHandler.sendMessage(msg);
-    }
-
-    @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
-        Message msg = Message.obtain();
-        msg.what = kOnSurfaceDestroyed;
-        mRenderHandler.sendMessage(msg);
+    public OpenGLContext glContext(){
+        return mGLContext;
     }
 
     // 控制渲染流程
     private void commonInit() {
+        // SurfaceView 回调
+        getHolder().addCallback(this);
+
         mGLViewHandlerThread = new HandlerThread("com.OpenGLView");
         mGLViewHandlerThread.start();
 
@@ -87,8 +74,12 @@ public class OpenGLSurfaceView extends SurfaceView implements SurfaceHolder.Call
                             GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
 
                             // GL绘制
-                            GLES20.glClear(0);
-                            GLES20.glClearColor(0,0,1,1);
+                            GLES20.glClearColor(1,0,0,1);
+                            GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
+
+                            if (renderler != null) {
+                                renderler.render(new Size(OpenGLSurfaceView.this.getWidth(), OpenGLSurfaceView.this.getHeight()));
+                            }
 
                             // 交换Renderbuffer前后帧
                             mGLContext.swapToScreen();
@@ -130,5 +121,27 @@ public class OpenGLSurfaceView extends SurfaceView implements SurfaceHolder.Call
         Message reMsg = new Message();
         reMsg.what = kOnSurfaceViewRender;
         mRenderHandler.sendMessageDelayed(reMsg,16);
+    }
+
+    // SurfaceView Life Cycle
+    @Override
+    public void surfaceCreated(SurfaceHolder holder) {
+        Message msg = Message.obtain();
+        msg.what = kOnSurfaceCreated;
+        mRenderHandler.sendMessage(msg);
+    }
+
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+        Message msg = Message.obtain();
+        msg.what = kOnSurfaceLayout;
+        mRenderHandler.sendMessage(msg);
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+        Message msg = Message.obtain();
+        msg.what = kOnSurfaceDestroyed;
+        mRenderHandler.sendMessage(msg);
     }
 }

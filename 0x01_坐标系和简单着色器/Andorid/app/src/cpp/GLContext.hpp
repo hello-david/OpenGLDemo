@@ -2,8 +2,8 @@
 // Created by David.Dai on 2018/9/21.
 //
 
-#ifndef ANDORID_GLCONTEXT_HPP
-#define ANDORID_GLCONTEXT_HPP
+#ifndef GLCONTEXT_HPP
+#define GLCONTEXT_HPP
 
 #include <stdio.h>
 #include <string>
@@ -38,7 +38,7 @@ namespace GLDemo {
         void checkEglError(std::string msg);
 
     public:
-        GLContext(GLRenderAPI apiLevel, ANativeWindow *window = nullptr);
+        GLContext(GLRenderAPI apiLevel = GLRenderAPIES2, const void *sharedObject = nullptr, ANativeWindow *window = nullptr);
         ~GLContext();
 
         bool isCurrentContext();
@@ -48,5 +48,4 @@ namespace GLDemo {
 
 }
 
-
-#endif //ANDORID_GLCONTEXT_HPP
+#endif //GLCONTEXT_HPP

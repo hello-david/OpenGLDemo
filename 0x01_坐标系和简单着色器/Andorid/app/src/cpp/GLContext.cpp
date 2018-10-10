@@ -9,7 +9,7 @@
 
 using namespace GLDemo;
 
-GLContext::GLContext(GLRenderAPI apiLevel, ANativeWindow *window) {
+GLContext::GLContext(GLRenderAPI apiLevel,const void *sharedObject, ANativeWindow *window) {
 
     // EGL配置
     EGLint confAttr[15] = {
@@ -75,7 +75,8 @@ GLContext::GLContext(GLRenderAPI apiLevel, ANativeWindow *window) {
     checkEglError("eglCreateWindowSurface");
 
     // 创建EGL Context
-    EGLContext context = eglCreateContext(display, config, nullptr, ctxAttr);
+    EGLContext sharedGLContext = (EGLContext)sharedObject;
+    EGLContext context = eglCreateContext(display, config, sharedGLContext, ctxAttr);
     if (context == EGL_NO_CONTEXT) {
         assert(false);
     }
@@ -103,7 +104,7 @@ void GLContext::swapToScreen() {
 }
 
 void GLContext::use() {
-    eglMakeCurrent(mDisplay, mSurface, mSurface , mContext);
+    eglMakeCurrent(mDisplay, mSurface, mSurface, mContext);
 }
 
 bool GLContext::isCurrentContext() {
@@ -116,59 +117,3 @@ void GLContext::checkEglError(std::string msg) {
         throw msg + ": EGL error: 0x" +   std::to_string(error);
     }
 }
-
-// JNI 层
-#ifdef __cplusplus
-extern "C"{
-#endif
-
-bool currentContextIsExist() {
-    return eglGetCurrentContext() != NULL;
-}
-
-JNIEXPORT jlong JNICALL
-Java_com_example_david_a0x00_OpenGLContext_createNativeGLContext(JNIEnv *env, jobject instance,
-                                                                 jint glVersion, jobject surface) {
-
-    GLDemo::GLRenderAPI api = GLDemo::GLRenderAPIES2;
-    switch (glVersion) {
-        case 1:
-            api = GLDemo::GLRenderAPIES1;
-            break;
-        case 2:
-            api = GLDemo::GLRenderAPIES2;
-            break;
-        case 3:
-            api = GLDemo::GLRenderAPIES3;
-            break;
-        default:break;
-    }
-    return reinterpret_cast<long>(new GLDemo::GLContext(api, ANativeWindow_fromSurface(env, surface)));
-}
-
-void Java_com_example_david_a0x00_OpenGLContext_use(JNIEnv * env, jobject obj, jlong nativeGLContext) {
-    GLDemo::GLContext *glContext = reinterpret_cast<GLDemo::GLContext *>(nativeGLContext);
-
-    if (glContext) {
-        glContext->use();
-    }
-}
-
-void Java_com_example_david_a0x00_OpenGLContext_dispose(JNIEnv * env, jobject obj, jlong nativeGLContext) {
-    GLDemo::GLContext *glContext = reinterpret_cast<GLDemo::GLContext *>(nativeGLContext);
-    if (glContext) {
-        delete glContext;
-    }
-}
-
-void Java_com_example_david_a0x00_OpenGLContext_swapToScreen(JNIEnv * env, jobject obj, jlong nativeGLContext) {
-    GLDemo::GLContext *glContext = reinterpret_cast<GLDemo::GLContext *>(nativeGLContext);
-
-    if (glContext) {
-        glContext->swapToScreen();
-    }
-}
-
-#ifdef __cplusplus
-}
-#endif
