@@ -21,9 +21,25 @@ struct _Size {
     }
 };
 
+union _GLVector2  {
+    struct { float x, y; };
+    struct { float r, g; };
+    struct { float s, t; };
+    float v[2];
+};
+typedef union _GLVector2 GLVector2;
+
+union _GLKVector3  {
+    struct { float x, y, z; };
+    struct { float r, g, b; };
+    struct { float s, t, p; };
+    float v[3];
+};
+typedef union _GLVector3 GLVector3;
+
 namespace GLDemo {
     class GLRender {
-    private:
+    protected:
         GLDemo::GLProgram *mProgram = nullptr;
         GLuint mPositionAttribute = 0;
         GLuint mInputTextureCoorAttribute = 0;
@@ -33,7 +49,7 @@ namespace GLDemo {
         GLRender();
         ~GLRender();
 
-        void render(const _Size &size);
+        virtual void render(const _Size &size);
     };
 }
 

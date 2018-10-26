@@ -44,6 +44,13 @@ static GLKVector3 movementVectors[3] = {
     return self;
 }
 
+- (void)dealloc {
+    if (_VBO != 0) {
+        glDeleteBuffers(1,&_VBO);
+        _VBO = 0;
+    }
+}
+
 - (void)render:(CGSize)size {
     // 当前上下文使用该渲染管线
     [self.program use];

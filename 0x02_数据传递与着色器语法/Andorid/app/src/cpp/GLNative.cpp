@@ -162,14 +162,14 @@ void Java_com_example_david_a0x00_OpenGLProgram_validate__J(JNIEnv *env, jobject
 // ------------- Render
 jlong Java_com_example_david_a0x00_OpenGLRender_createRender(JNIEnv *env, jobject instance) {
 
-    GLDemo::GLRender *glRender = new GLDemo::GLRender();
+    GLDemo::GLTriangleRender *glRender = new GLDemo::GLTriangleRender();
     return reinterpret_cast<long>(glRender);
 }
 
 void Java_com_example_david_a0x00_OpenGLRender_render__JII(JNIEnv *env, jobject instance,
                                                       jlong nativeRender, jint width, jint height) {
 
-    GLDemo::GLRender *glRender = reinterpret_cast<GLDemo::GLRender *>(nativeRender);
+    GLDemo::GLTriangleRender *glRender = reinterpret_cast<GLDemo::GLTriangleRender *>(nativeRender);
     glRender->render({(float)(width), (float)(height)});
 }
 

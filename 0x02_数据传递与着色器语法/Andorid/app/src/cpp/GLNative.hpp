@@ -8,5 +8,6 @@
 #include "GLContext.hpp"
 #include "GLProgram.hpp"
 #include "GLRender.hpp"
+#include "GLTriangleRender.hpp"
 
 #endif //ANDORID_GLNATIVE_HPP
