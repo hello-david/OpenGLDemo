@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-@import OpenGLES;
+
+#import <OpenGLES/EAGL.h>
+#import <OpenGLES/ES1/gl.h>
+#import <OpenGLES/ES2/gl.h>
+#import <OpenGLES/ES3/gl.h>
 
 @interface OpenGLProgram : NSObject
 @property (nonatomic, strong, readonly) NSString *vertexShaderLog;
