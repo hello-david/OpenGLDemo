@@ -19,6 +19,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         [self loadTexutreFromPath:[[NSBundle mainBundle] pathForResource:@"1" ofType:@"jpg"]];
+//        [self loadTexutreFromPath:[[NSBundle mainBundle] pathForResource:@"2" ofType:@"jpg"]];
     }
     return self;
 }

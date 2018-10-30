@@ -34,6 +34,13 @@
         1.0, 1.0
     };
     
+//    const float inputTextureCoor[8] = {
+//        0,     0,
+//        2.0,   0,
+//        0,   2.0,
+//        2.0, 2.0
+//    };
+    
     float rotateInputTextureCoor[8];
     rotateInputTextureCoor[0] = inputTextureCoor[4];
     rotateInputTextureCoor[1] = inputTextureCoor[5];
