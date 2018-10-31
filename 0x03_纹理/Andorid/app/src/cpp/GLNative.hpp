@@ -9,9 +9,6 @@
 #include "GLProgram.hpp"
 #include "GLRender.hpp"
 #include "GLTriangleRender.hpp"
-
-#include "stb_image.h"
-#include "stb_image_write.h"
-#include "stb_image_resize.h"
+#include "GLTextureRender.hpp"
 
 #endif //ANDORID_GLNATIVE_HPP

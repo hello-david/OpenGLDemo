@@ -74,7 +74,7 @@ public class OpenGLSurfaceView extends SurfaceView implements SurfaceHolder.Call
                             GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
 
                             // GL绘制
-                            GLES20.glClearColor(1,0,0,1);
+                            GLES20.glClearColor(1,1,1,1);
                             GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
 
                             if (renderler != null) {

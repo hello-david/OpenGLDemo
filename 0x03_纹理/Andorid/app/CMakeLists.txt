@@ -22,6 +22,8 @@ add_library( # Sets the name of the library.
              ./src/cpp/GLRender.cpp
              ./src/cpp/GLNative.cpp
              ./src/cpp/GLTriangleRender.cpp
+             ./src/cpp/GLTextureRender.cpp
+             ./src/cpp/GLTexture.cpp
              )
 
 # Searches for a specified prebuilt library and stores the path as a

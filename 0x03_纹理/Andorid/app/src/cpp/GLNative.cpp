@@ -161,8 +161,14 @@ void Java_com_example_david_a0x00_OpenGLProgram_validate__J(JNIEnv *env, jobject
 
 // ------------- Render
 jlong Java_com_example_david_a0x00_OpenGLRender_createRender(JNIEnv *env, jobject instance) {
-
     GLDemo::GLTriangleRender *glRender = new GLDemo::GLTriangleRender();
+    return reinterpret_cast<long>(glRender);
+}
+
+jlong Java_com_example_david_a0x00_OpenGLRender_createTextureRender(JNIEnv *env, jobject instance, jstring path_) {
+    const char *path = env->GetStringUTFChars(path_, 0);
+    GLDemo::GLTextureRender *glRender = new GLDemo::GLTextureRender(path);
+    env->ReleaseStringUTFChars(path_, path);
     return reinterpret_cast<long>(glRender);
 }
 

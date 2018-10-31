@@ -1,46 +1,42 @@
 //
-//  OpenGLTexture.m
-//  OpenGLDemo
-//
-//  Created by David.Dai on 2018/10/30.
-//  Copyright © 2018 David.Dai. All rights reserved.
+// Created by David.Dai on 2018/10/30.
 //
 
-#import "OpenGLTexture.h"
+#include "GLTexture.hpp"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
-@interface OpenGLTexture()
-@property (nonatomic, assign) NSUInteger width;
-@property (nonatomic, assign) NSUInteger height;
-@end
 
-@implementation OpenGLTexture
-- (instancetype)init {
-    if (self = [super init]) {
-        [self loadTexutreFromPath:[[NSBundle mainBundle] pathForResource:@"1" ofType:@"jpg"]];
-//        [self loadTexutreFromPath:[[NSBundle mainBundle] pathForResource:@"2" ofType:@"jpg"]];
-    }
-    return self;
+using namespace GLDemo;
+
+GLTexture::GLTexture(const std::string &imagePath) {
+    loadTexutreFromPath(imagePath);
 }
 
-- (void)loadTexutreFromPath:(NSString *)path {
-    if (!path) {
+GLTexture::~GLTexture() {
+    if (mTexture) {
+        glDeleteTextures(1, &mTexture);
+        mTexture = 0;
+    }
+}
+
+void GLTexture::loadTexutreFromPath(const std::string &path) {
+    if (!path.length()) {
         return ;
     }
-    
-    if (self.texture) {
-        glDeleteTextures(1, &_texture);
-        self.texture = 0;
+
+    if (mTexture) {
+        glDeleteTextures(1, &mTexture);
+        mTexture = 0;
     }
-    
+
     int width = 0;
     int height = 0;
     int imageFormat = 0;
-    
+
     // 通过stb这个库加载图片
-    void *imageData = stbi_load([path cStringUsingEncoding:NSUTF8StringEncoding], &width, &height, &imageFormat, STBI_default);
-    
+    void *imageData = stbi_load(path.c_str(), &width, &height, &imageFormat, STBI_default);
+
     // 获取图片格式和像素对齐数
     int alignment = 1;
     GLuint glImageFormat = GL_RGBA;
@@ -59,32 +55,29 @@
             alignment = 4;
             break;
     }
-    
+
     // 设置像素字节对齐数，默认4字节
     glPixelStorei(GL_UNPACK_ALIGNMENT, alignment);
-    [self initTexture:imageData width:width height:height imageFormat:glImageFormat texureFormat:glImageFormat];
+    initTexture(imageData, width, height, glImageFormat, glImageFormat);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
- 
+
     STBI_FREE(imageData);
 }
 
-- (void)initTexture:(void *)data width:(int)width height:(int)height imageFormat:(GLuint)imageFormat texureFormat:(GLuint)texureFormat {
+void GLTexture::initTexture(void *data, int width, int height, GLuint imageFormat, GLuint texureFormat) {
     // 生成并绑定Texure
-    glGenTextures(1, &_texture);
-    glBindTexture(GL_TEXTURE_2D, _texture);
+    glGenTextures(1, &mTexture);
+    glBindTexture(GL_TEXTURE_2D, mTexture);
     glTexImage2D(GL_TEXTURE_2D, 0, imageFormat, width, height, 0, texureFormat, GL_UNSIGNED_BYTE, data);
-    
+
     // 设置纹理单元的滤波方式
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    
+
     // 设置纹理单元的环绕模式
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    
-    self.width = width;
-    self.height = height;
-    self.size = {(float)self.width, (float)self.height};
-}
 
-@end
+    mWidth = width;
+    mHeight = height;
+}

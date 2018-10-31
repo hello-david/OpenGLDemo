@@ -26,8 +26,12 @@ const char *kFragmentShader = R"(
 )";
 
 
-GLRender::GLRender() {
-    mProgram = new GLProgram(kVertexShader, kFragmentShader);
+GLRender::GLRender() : GLRender(kVertexShader, kFragmentShader) {
+
+}
+
+GLRender::GLRender(const std::string &vertexStr, const std::string &fragmentStr) {
+    mProgram = new GLProgram(vertexStr, fragmentStr);
     if (!mProgram->link()) {
         std::string progLog = mProgram->programLog();
         printf("Program link log: %s", progLog.c_str());
