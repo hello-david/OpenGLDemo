@@ -61,6 +61,68 @@ NSString *const kSaturationFragmentShaderString = SHADER_STRING
  }
 );
 
+#pragma mark - 锐化
+NSString *const kSharpenVertexShaderString = SHADER_STRING
+(
+ attribute vec4 position;
+ attribute vec4 inputTextureCoordinate;
+ 
+ uniform float imageWidthFactor;
+ uniform float imageHeightFactor;
+ uniform float sharpness;
+ 
+ varying vec2 textureCoordinate;
+ varying vec2 leftTextureCoordinate;
+ varying vec2 rightTextureCoordinate;
+ varying vec2 topTextureCoordinate;
+ varying vec2 bottomTextureCoordinate;
+ 
+ varying float centerMultiplier;
+ varying float edgeMultiplier;
+ 
+ void main() {
+     gl_Position = position;
+     
+     vec2 widthStep = vec2(imageWidthFactor, 0.0);
+     vec2 heightStep = vec2(0.0, imageHeightFactor);
+     
+     textureCoordinate = inputTextureCoordinate.xy;
+     leftTextureCoordinate = inputTextureCoordinate.xy - widthStep;
+     rightTextureCoordinate = inputTextureCoordinate.xy + widthStep;
+     topTextureCoordinate = inputTextureCoordinate.xy + heightStep;
+     bottomTextureCoordinate = inputTextureCoordinate.xy - heightStep;
+     
+     centerMultiplier = 1.0 + 4.0 * sharpness;
+     edgeMultiplier = sharpness;
+ }
+ );
+
+NSString *const kSharpenFragmentShaderString = SHADER_STRING
+(
+ precision highp float;
+ 
+ varying highp vec2 textureCoordinate;
+ varying highp vec2 leftTextureCoordinate;
+ varying highp vec2 rightTextureCoordinate;
+ varying highp vec2 topTextureCoordinate;
+ varying highp vec2 bottomTextureCoordinate;
+ 
+ varying highp float centerMultiplier;
+ varying highp float edgeMultiplier;
+ 
+ uniform sampler2D inputTexture;
+ 
+ void main() {
+     mediump vec3 textureColor = texture2D(inputTexture, textureCoordinate).rgb;
+     mediump vec3 leftTextureColor = texture2D(inputTexture, leftTextureCoordinate).rgb;
+     mediump vec3 rightTextureColor = texture2D(inputTexture, rightTextureCoordinate).rgb;
+     mediump vec3 topTextureColor = texture2D(inputTexture, topTextureCoordinate).rgb;
+     mediump vec3 bottomTextureColor = texture2D(inputTexture, bottomTextureCoordinate).rgb;
+     
+     gl_FragColor = vec4((textureColor * centerMultiplier - (leftTextureColor * edgeMultiplier + rightTextureColor * edgeMultiplier + topTextureColor * edgeMultiplier + bottomTextureColor * edgeMultiplier)), texture2D(inputTexture, bottomTextureCoordinate).w);
+ }
+ );
+
 #pragma mark -
 @interface OpenGLSimpleRender()
 @property (nonatomic, strong) OpenGLTexture *texture;
@@ -69,13 +131,17 @@ NSString *const kSaturationFragmentShaderString = SHADER_STRING
 @property (nonatomic, assign) GLint contrastUniform;
 @property (nonatomic, assign) GLint luminanceUniform;
 @property (nonatomic, assign) GLint saturationUniform;
+
+@property (nonatomic, assign) GLint sharpnessUniform;
+@property (nonatomic, assign) GLint imageWidthFactorUniform;
+@property (nonatomic, assign) GLint imageHeightFactorUniform;
 @end
 
 @implementation OpenGLSimpleRender
 
 - (instancetype)init {
     if (self = [super init]) {
-        self.program = [[OpenGLProgram alloc] initWithVertexShader:kVertexShaderString fragmentShader:kSaturationFragmentShaderString];
+        self.program = [[OpenGLProgram alloc] initWithVertexShader:kSharpenVertexShaderString fragmentShader:kSharpenFragmentShaderString];
         self.texture = [[OpenGLTexture alloc] init];
         self.percent = 1.0;
         
@@ -95,12 +161,19 @@ NSString *const kSaturationFragmentShaderString = SHADER_STRING
         self.luminanceUniform = [self.program uniformIndex:@"rangeReduction"];
         self.saturationUniform = [self.program uniformIndex:@"saturation"];
         
+        self.sharpnessUniform = [self.program uniformIndex:@"sharpness"];
+        self.imageWidthFactorUniform = [self.program uniformIndex:@"imageWidthFactor"];
+        self.imageHeightFactorUniform = [self.program uniformIndex:@"imageHeightFactor"];
+        
     }
     return self;
 }
 
+/**
+ *  这里只是为了验证效果，所以取值区间简易设置
+ */
 - (void)setEffectPercent:(float)percent {
-    self.percent = (0.5 + percent);
+    self.percent = (0.5 + percent * 2);
 }
 
 - (void)render:(CGSize)size {
@@ -137,7 +210,13 @@ NSString *const kSaturationFragmentShaderString = SHADER_STRING
     glVertexAttribPointer(self.inputTextureCoorAttribute, 2, GL_FLOAT, GL_FALSE, 0, rotateInputTextureCoor);
     
     // 传递uniform到着色器中
-    glUniform1f(self.saturationUniform, self.percent);
+//    glUniform1f(self.contrastUniform, self.percent);
+//    glUniform1f(self.luminanceUniform, self.percent);
+//    glUniform1f(self.saturationUniform, self.percent);
+    
+    glUniform1f(self.sharpnessUniform, self.percent);
+    glUniform1f(self.imageWidthFactorUniform, 1.0 / size.height);
+    glUniform1f(self.imageHeightFactorUniform, 1.0 / size.width);
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     
