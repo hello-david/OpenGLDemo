@@ -123,6 +123,34 @@ NSString *const kSharpenFragmentShaderString = SHADER_STRING
  }
  );
 
+#pragma mark - 影晕
+NSString *const kVignetteFragmentShaderString = SHADER_STRING
+(
+ uniform sampler2D inputTexture;
+ varying highp vec2 textureCoordinate;
+ 
+ uniform lowp vec2 vignetteCenter;
+ uniform lowp vec3 vignetteColor;
+ uniform highp float vignetteStart;
+ uniform highp float vignetteEnd;
+ 
+ void main()
+ {
+     lowp vec4 sourceImageColor = texture2D(inputTexture, textureCoordinate);
+     lowp float d = distance(textureCoordinate, vec2(vignetteCenter.x, vignetteCenter.y));
+     lowp float percent = smoothstep(vignetteStart, vignetteEnd, d);
+     gl_FragColor = vec4(mix(sourceImageColor.rgb, vignetteColor, percent), sourceImageColor.a);
+ }
+ );
+
+union _Marix3 {
+    struct { float x, y, z; };
+    struct { float r, g, b; };
+    struct { float s, t, p; };
+    float v[3];
+};
+typedef union _Marix3 Marix3;
+
 #pragma mark -
 @interface OpenGLSimpleRender()
 @property (nonatomic, strong) OpenGLTexture *texture;
@@ -135,13 +163,23 @@ NSString *const kSharpenFragmentShaderString = SHADER_STRING
 @property (nonatomic, assign) GLint sharpnessUniform;
 @property (nonatomic, assign) GLint imageWidthFactorUniform;
 @property (nonatomic, assign) GLint imageHeightFactorUniform;
+
+@property (nonatomic, assign) GLint vignetteCenterUniform;
+@property (nonatomic, assign) GLint vignetteColorUniform;
+@property (nonatomic, assign) GLint vignetteStartUniform;
+@property (nonatomic, assign) GLint vignetteEndUniform;
+@property (nonatomic, readwrite) CGPoint vignetteCenter;
+@property (nonatomic, readwrite) Marix3 vignetteColor;
+@property (nonatomic, readwrite) CGFloat vignetteStart;
+@property (nonatomic, readwrite) CGFloat vignetteEnd;
+
 @end
 
 @implementation OpenGLSimpleRender
 
 - (instancetype)init {
     if (self = [super init]) {
-        self.program = [[OpenGLProgram alloc] initWithVertexShader:kSharpenVertexShaderString fragmentShader:kSharpenFragmentShaderString];
+        self.program = [[OpenGLProgram alloc] initWithVertexShader:kVertexShaderString fragmentShader:kVignetteFragmentShaderString];
         self.texture = [[OpenGLTexture alloc] init];
         self.percent = 1.0;
         
@@ -165,6 +203,15 @@ NSString *const kSharpenFragmentShaderString = SHADER_STRING
         self.imageWidthFactorUniform = [self.program uniformIndex:@"imageWidthFactor"];
         self.imageHeightFactorUniform = [self.program uniformIndex:@"imageHeightFactor"];
         
+        self.vignetteCenterUniform = [self.program uniformIndex:@"vignetteCenter"];
+        self.vignetteColorUniform = [self.program uniformIndex:@"vignetteColor"];
+        self.vignetteStartUniform = [self.program uniformIndex:@"vignetteStart"];
+        self.vignetteEndUniform = [self.program uniformIndex:@"vignetteEnd"];
+        
+        self.vignetteCenter = (CGPoint){0.5f, 0.5f};
+        self.vignetteColor = (Marix3){1.0f, 1.0f, 1.0f};
+        self.vignetteStart = 0.3;
+        self.vignetteEnd = 0.75;
     }
     return self;
 }
@@ -173,7 +220,7 @@ NSString *const kSharpenFragmentShaderString = SHADER_STRING
  *  这里只是为了验证效果，所以取值区间简易设置
  */
 - (void)setEffectPercent:(float)percent {
-    self.percent = (0.5 + percent * 2);
+    self.percent = (0.5 + percent);
 }
 
 - (void)render:(CGSize)size {
@@ -214,9 +261,14 @@ NSString *const kSharpenFragmentShaderString = SHADER_STRING
 //    glUniform1f(self.luminanceUniform, self.percent);
 //    glUniform1f(self.saturationUniform, self.percent);
     
-    glUniform1f(self.sharpnessUniform, self.percent);
-    glUniform1f(self.imageWidthFactorUniform, 1.0 / size.height);
-    glUniform1f(self.imageHeightFactorUniform, 1.0 / size.width);
+//    glUniform1f(self.sharpnessUniform, self.percent);
+//    glUniform1f(self.imageWidthFactorUniform, 1.0 / size.height);
+//    glUniform1f(self.imageHeightFactorUniform, 1.0 / size.width);
+    
+    glUniform1f(self.vignetteStartUniform, self.vignetteStart);
+    glUniform1f(self.vignetteEndUniform, self.percent);
+    glUniform2f(self.vignetteCenterUniform, self.vignetteCenter.x, self.vignetteCenter.y);
+    glUniform3f(self.vignetteColorUniform, self.vignetteColor.r, self.vignetteColor.g, self.vignetteColor.b);
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     
