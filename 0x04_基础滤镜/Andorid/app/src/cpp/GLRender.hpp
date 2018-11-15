@@ -9,8 +9,10 @@
 #include "GLMath.hpp"
 #include "GLProgram.hpp"
 
-extern const char* kVertexShader;
-extern const char* kFragmentShader;
+extern const char *kVertexShader;
+extern const char *kFragmentShader;
+extern const char *kVertexForTextureShader;
+extern const char *kFragmentForTextureShader;
 
 namespace GLDemo {
     class GLRender {

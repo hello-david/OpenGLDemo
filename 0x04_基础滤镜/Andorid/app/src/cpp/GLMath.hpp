@@ -23,7 +23,7 @@ union _GLVector2  {
 };
 typedef union _GLVector2 GLVector2;
 
-union _GLKVector3  {
+union _GLVector3  {
     struct { float x, y, z; };
     struct { float r, g, b; };
     struct { float s, t, p; };

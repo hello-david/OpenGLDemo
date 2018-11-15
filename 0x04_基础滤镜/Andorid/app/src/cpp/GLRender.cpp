@@ -8,20 +8,37 @@ using namespace GLDemo;
 
 const char *kVertexShader = R"(
  attribute vec2 position;
- varying vec2 textureCoordinate;
 
  void main() {
      gl_Position = vec4(position.xy, 0, 1);
  }
 )";
 
+const char *kVertexForTextureShader = R"(
+ attribute vec2 position;
+ attribute vec2 inputTextureCoordinate;
+ varying vec2 textureCoordinate;
+
+ void main() {
+     gl_Position = vec4(position.xy, 0, 1);
+     textureCoordinate = inputTextureCoordinate;
+ }
+)";
+
 const char *kFragmentShader = R"(
  precision mediump float;
- varying vec2 textureCoordinate;
- uniform sampler2D inputTexture;
 
  void main() {
      gl_FragColor = vec4(0,0,0,1);
+ }
+)";
+
+const char *kFragmentForTextureShader = R"(
+ varying highp vec2 textureCoordinate;
+ uniform sampler2D inputTexture;
+
+ void main() {
+     gl_FragColor = texture2D(inputTexture, textureCoordinate);
  }
 )";
 

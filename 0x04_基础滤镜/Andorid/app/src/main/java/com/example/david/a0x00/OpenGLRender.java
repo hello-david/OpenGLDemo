@@ -18,6 +18,16 @@ public class OpenGLRender {
         return getAssetsCacheFile(MainActivity.getContext(), "texture1.jpg");
     }
 
+    public void setPercent(float percent) {
+        setPercent(mNativeRender, percent);
+    }
+
+    /**
+     * 读出一张在Assets里面的图片并生成到缓存文件中，返回缓存文件的绝对地址
+     * @param context JAVA上下文环境
+     * @param fileName Assets里的文件名
+     * @return  缓存文件的绝对路径
+     */
     public String getAssetsCacheFile(Context context,String fileName)   {
         File cacheFile = new File(context.getCacheDir(), fileName);
         try {
@@ -46,6 +56,7 @@ public class OpenGLRender {
 
     private native long createRender();
     private native long createTextureRender(String path);
+    private native void setPercent(long nativeRender, float percent);
     private native void render(long nativeRender, int width, int height);
 
 }

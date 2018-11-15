@@ -10,5 +10,6 @@
 #include "GLRender.hpp"
 #include "GLTriangleRender.hpp"
 #include "GLTextureRender.hpp"
+#include "GLSimpleRender.hpp"
 
 #endif //ANDORID_GLNATIVE_HPP

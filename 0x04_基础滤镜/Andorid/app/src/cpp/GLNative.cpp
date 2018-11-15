@@ -167,7 +167,7 @@ jlong Java_com_example_david_a0x00_OpenGLRender_createRender(JNIEnv *env, jobjec
 
 jlong Java_com_example_david_a0x00_OpenGLRender_createTextureRender(JNIEnv *env, jobject instance, jstring path_) {
     const char *path = env->GetStringUTFChars(path_, 0);
-    GLDemo::GLTextureRender *glRender = new GLDemo::GLTextureRender(path);
+    GLDemo::GLSimpleRender *glRender = new GLDemo::GLSimpleRender(path);
     env->ReleaseStringUTFChars(path_, path);
     return reinterpret_cast<long>(glRender);
 }
@@ -177,6 +177,14 @@ void Java_com_example_david_a0x00_OpenGLRender_render__JII(JNIEnv *env, jobject 
 
     GLDemo::GLTriangleRender *glRender = reinterpret_cast<GLDemo::GLTriangleRender *>(nativeRender);
     glRender->render({(float)(width), (float)(height)});
+}
+
+void Java_com_example_david_a0x00_OpenGLRender_setPercent__JF(JNIEnv *env, jobject instance,
+                                                              jlong nativeRender, jfloat percent) {
+
+    // TODO
+    GLDemo::GLSimpleRender *glRender = reinterpret_cast<GLDemo::GLSimpleRender *>(nativeRender);
+    glRender->setEffectPercent(percent);
 }
 
 #ifdef __cplusplus

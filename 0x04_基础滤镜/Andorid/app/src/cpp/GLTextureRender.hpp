@@ -6,6 +6,7 @@
 #define ANDORID_GLTEXTURERENDER_HPP
 
 #include <stdio.h>
+#include "GLMath.hpp"
 #include "GLRender.hpp"
 #include "GLTexture.hpp"
 

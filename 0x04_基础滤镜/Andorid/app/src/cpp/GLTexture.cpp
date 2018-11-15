@@ -4,6 +4,7 @@
 
 #include "GLTexture.hpp"
 
+// 需要加上这个宏不然编译器会编译失败
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 

@@ -5,27 +5,8 @@
 #include "GLTextureRender.hpp"
 
 using namespace GLDemo;
-const char *kTextureVertexShader = R"(
- attribute vec2 position;
- attribute vec2 inputTextureCoordinate;
- varying vec2 textureCoordinate;
 
- void main() {
-     gl_Position = vec4(position.xy, 0, 1);
-     textureCoordinate = inputTextureCoordinate;
- }
-)";
-
-const char *kTextureFragmentShader = R"(
- varying highp vec2 textureCoordinate;
- uniform sampler2D inputTexture;
-
- void main() {
-     gl_FragColor = texture2D(inputTexture, textureCoordinate);
- }
-)";
-
-GLTextureRender::GLTextureRender(const std::string &imagePath) : GLRender(kTextureVertexShader, kTextureFragmentShader) {
+GLTextureRender::GLTextureRender(const std::string &imagePath) : GLRender(kVertexForTextureShader, kFragmentForTextureShader) {
     mTexture = new GLTexture(imagePath);
 }
 
