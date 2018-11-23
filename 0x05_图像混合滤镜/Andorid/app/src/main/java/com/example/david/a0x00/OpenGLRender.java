@@ -11,11 +11,11 @@ public class OpenGLRender {
     private long mNativeRender;
 
     OpenGLRender() {
-        mNativeRender = createTextureRender(getResource());
+        mNativeRender = createRenderWithTwoTexture(getResource("texture1.jpg"), getResource("texture3.png"));
     };
 
-    private String getResource() {
-        return getAssetsCacheFile(MainActivity.getContext(), "texture1.jpg");
+    private String getResource(String fileName) {
+        return getAssetsCacheFile(MainActivity.getContext(), fileName);
     }
 
     public void setPercent(float percent) {
@@ -56,6 +56,7 @@ public class OpenGLRender {
 
     private native long createRender();
     private native long createTextureRender(String path);
+    private native long createRenderWithTwoTexture(String first, String secondPath);
     private native void setPercent(long nativeRender, float percent);
     private native void render(long nativeRender, int width, int height);
 

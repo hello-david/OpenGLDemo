@@ -27,6 +27,7 @@ namespace GLDemo {
         GLRender(const std::string &vertexStr, const std::string &fragmentStr);
         ~GLRender();
 
+        GLfloat *textureVertexForViewSize(_Size viewSize, _Size textureSize);
         virtual void render(const _Size &size);
     };
 }

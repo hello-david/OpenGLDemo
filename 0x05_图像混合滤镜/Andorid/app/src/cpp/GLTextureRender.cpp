@@ -61,34 +61,3 @@ void GLTextureRender::render(const _Size &size) {
     glDisableVertexAttribArray(mPositionAttribute);
     glDisableVertexAttribArray(mInputTextureCoorAttribute);
 }
-
-/**
- *  调整纹理顶点坐标让它和ViewPort比例一致
- */
-GLfloat *GLTextureRender::textureVertexForViewSize(_Size viewSize, _Size textureSize) {
-    static GLfloat position[8];
-
-    GLfloat viewAspectRatio = viewSize.width / viewSize.height;
-    GLfloat textureAspectRatio = textureSize.width / textureSize.height;
-
-    GLfloat widthScaling = 1;
-    GLfloat heightScaling = 1;
-    if (viewAspectRatio < textureAspectRatio) {
-        GLfloat height = (viewSize.width / textureSize.width) * textureSize.height;
-        heightScaling = height / viewSize.height;
-    }else{
-        GLfloat width = (viewSize.height / textureSize.height) * textureSize.width;
-        widthScaling = width / viewSize.width;
-    }
-
-    position[0] = -widthScaling;
-    position[1] = -heightScaling;
-    position[2] = widthScaling;
-    position[3] = -heightScaling;
-    position[4] = -widthScaling;
-    position[5] = heightScaling;
-    position[6] = widthScaling;
-    position[7] = heightScaling;
-    return position;
-
-}

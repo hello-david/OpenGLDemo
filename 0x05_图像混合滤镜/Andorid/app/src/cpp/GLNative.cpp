@@ -172,6 +172,18 @@ jlong Java_com_example_david_a0x00_OpenGLRender_createTextureRender(JNIEnv *env,
     return reinterpret_cast<long>(glRender);
 }
 
+jlong Java_com_example_david_a0x00_OpenGLRender_createRenderWithTwoTexture(JNIEnv *env, jobject instance,
+        jstring first_,
+jstring secondPath_) {
+    const char *first = env->GetStringUTFChars(first_, 0);
+    const char *secondPath = env->GetStringUTFChars(secondPath_, 0);
+    GLDemo::GLTextureBlendingRender *glRender = new GLDemo::GLTextureBlendingRender(first, secondPath);
+
+    env->ReleaseStringUTFChars(first_, first);
+    env->ReleaseStringUTFChars(secondPath_, secondPath);
+    return reinterpret_cast<long>(glRender);
+}
+
 void Java_com_example_david_a0x00_OpenGLRender_render__JII(JNIEnv *env, jobject instance,
                                                       jlong nativeRender, jint width, jint height) {
 

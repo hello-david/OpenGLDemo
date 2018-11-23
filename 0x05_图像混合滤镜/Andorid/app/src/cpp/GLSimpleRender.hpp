@@ -32,7 +32,6 @@ namespace GLDemo {
         float mVignetteStart= 0.3f, mVignetteEnd = 0.75f;
 
     protected:
-        GLfloat *textureVertexForViewSize(_Size viewSize , _Size textureSize);
         GLTexture *mTexture = nullptr;
 
     public:

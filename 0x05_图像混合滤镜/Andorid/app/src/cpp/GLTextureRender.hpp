@@ -14,7 +14,6 @@ namespace GLDemo {
     class GLTextureRender : public GLRender {
 
     protected:
-        GLfloat *textureVertexForViewSize(_Size viewSize , _Size textureSize);
         GLTexture *mTexture = nullptr;
 
     public:

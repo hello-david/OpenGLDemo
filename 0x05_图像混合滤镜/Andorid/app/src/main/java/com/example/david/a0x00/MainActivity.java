@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements OpenGLSurfaceView
 
         // SeekBar
         seekBar = (SeekBar) findViewById(R.id.seekBar);
+        seekBar.setAlpha(0);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             /**
              * 拖动条停止拖动的时候调用
