@@ -16,16 +16,19 @@
 
 @implementation OpenGLTextureRender
 
-- (instancetype)init {
-    if (self = [super init]) {
-        self.texture = [[OpenGLTexture alloc] init];
+- (OpenGLTexture *)texture {
+    if (!_texture) {
+        _texture = [[OpenGLTexture alloc] init];
     }
-    return self;
+    return _texture;
 }
 
-- (void)render:(CGSize)size {
+- (void)render:(CGSize)size setupViewPort:(BOOL)setupViewPort {
     [self.program use];
-    glViewport(0, 0, size.width, size.height);
+    
+    if (setupViewPort) {
+        glViewport(0, 0, size.width, size.height);
+    }
     
     const float inputTextureCoor[8] = {
           0,   0,

@@ -9,5 +9,4 @@
 #import <UIKit/UIKit.h>
 @import GLKit;
 @interface OpenGLKView : GLKView
-
 @end

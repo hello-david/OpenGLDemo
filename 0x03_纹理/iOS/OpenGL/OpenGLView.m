@@ -167,7 +167,7 @@
     glClearColor(1, 1, 1, 1);// 白色
     glClear(GL_COLOR_BUFFER_BIT);
     
-    [self.render render:self.frame.size];
+    [self.render render:self.frame.size setupViewPort:YES];
     
     // 告知eaglContext可以renderbuffer
     [self.context swapToScreen];

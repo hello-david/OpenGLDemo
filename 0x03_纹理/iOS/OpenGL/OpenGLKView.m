@@ -7,21 +7,31 @@
 //
 
 #import "OpenGLKView.h"
+#import "OpenGLTextureRender.h"
+
+@interface OpenGLKView()
+@property (nonatomic, strong) OpenGLTextureRender *textureRender;
+@end
 
 @implementation OpenGLKView
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
-        self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+- (OpenGLTextureRender *)textureRender {
+    if (!_textureRender) {
+        _textureRender = [[OpenGLTextureRender alloc] init];
     }
-    return self;
+    return _textureRender;
 }
 
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
+    if (!self.context) {
+        return;
+    }
     
-    glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    [EAGLContext setCurrentContext:self.context];
+    [self.textureRender render:self.frame.size setupViewPort:NO];
+    [EAGLContext setCurrentContext:nil];
+    
 }
 
 @end

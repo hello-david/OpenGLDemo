@@ -21,5 +21,5 @@ extern NSString *const kFragmentShaderString;
 @interface OpenGLRender : NSObject
 @property (nonatomic, strong) OpenGLProgram *program;
 
-- (void)render:(CGSize)size;
+- (void)render:(CGSize)size setupViewPort:(BOOL)setupViewPort;
 @end

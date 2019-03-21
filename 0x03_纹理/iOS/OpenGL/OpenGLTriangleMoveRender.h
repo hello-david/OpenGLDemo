@@ -10,6 +10,6 @@
 
 @interface OpenGLTriangleMoveRender : OpenGLRender
 
-- (void)render:(CGSize)size;
+- (void)render:(CGSize)size setupViewPort:(BOOL)setupViewPort;
 @end
 

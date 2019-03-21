@@ -51,12 +51,14 @@ static GLKVector3 movementVectors[3] = {
     }
 }
 
-- (void)render:(CGSize)size {
+- (void)render:(CGSize)size setupViewPort:(BOOL)setupViewPort {
     // 当前上下文使用该渲染管线
     [self.program use];
     
     // 定义裁剪空间转换到屏幕上的空间大小
-    glViewport(0, 0, size.width, size.height);
+    if (setupViewPort) {
+        glViewport(0, 0, size.width, size.height);
+    }
     
     // 更新VBO的数值
     [self updateAnimatedVertexPositions];

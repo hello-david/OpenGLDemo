@@ -1,3 +1,2 @@
 # OpenGLDemo
-OpenGL学习实例
-https://hello-david.github.io/
+[OpenGL学习相关文档](https://hello-david.github.io/)

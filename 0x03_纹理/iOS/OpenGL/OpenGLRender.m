@@ -32,33 +32,34 @@ NSString *const kFragmentShaderString = SHADER_STRING
  );
 
 @implementation OpenGLRender
-
-- (instancetype)init {
-    if (self = [super init]) {
-        self.program = [[OpenGLProgram alloc] initWithVertexShader:kVertexShaderString fragmentShader:kFragmentShaderString];
+- (OpenGLProgram *)program {
+    if (!_program) {
+        _program = [[OpenGLProgram alloc] initWithVertexShader:kVertexShaderString fragmentShader:kFragmentShaderString];
         
-        if (![self.program linkShader]) {
-            NSLog(@"Program link log:%@",self.program.programLog);
-            NSLog(@"Vertex shader compile log:%@",self.program.vertexShaderLog);
-            NSLog(@"Fragment shader compile log:%@",self.program.fragmentShaderLog);
+        if (![_program linkShader]) {
+            NSLog(@"Program link log:%@",_program.programLog);
+            NSLog(@"Vertex shader compile log:%@",_program.vertexShaderLog);
+            NSLog(@"Fragment shader compile log:%@",_program.fragmentShaderLog);
             assert(false);
         }
         
         // 给Program添加属性(shader脚本中定义好的变量)，默认脚本中使用三个变量
-        self.positionAttribute = [self.program attributeIndex:@"position"];
-        self.inputTextureCoorAttribute = [self.program attributeIndex:@"inputTextureCoordinate"];
-        self.textureUniform = [self.program uniformIndex:@"inputTexture"];
+        _positionAttribute = [_program attributeIndex:@"position"];
+        _inputTextureCoorAttribute = [_program attributeIndex:@"inputTextureCoordinate"];
+        _textureUniform = [_program uniformIndex:@"inputTexture"];
     }
-    return self;
+    return _program;
 }
 
 // 通过默认脚本绘制一个三角形
-- (void)render:(CGSize)size {
+- (void)render:(CGSize)size setupViewPort:(BOOL)setupViewPort {
     // 当前上下文使用该渲染管线
     [self.program use];
     
     // 定义裁剪空间转换到屏幕上的空间大小
-    glViewport(0, 0, size.width, size.height);
+    if (setupViewPort) {
+        glViewport(0, 0, size.width, size.height);
+    }
     
     // 输入顶点坐标
     glEnableVertexAttribArray(self.positionAttribute);
