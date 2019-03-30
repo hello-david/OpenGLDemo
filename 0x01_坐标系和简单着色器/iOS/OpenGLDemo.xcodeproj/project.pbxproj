@@ -87,14 +87,14 @@
 		95CC9C91224F8994001E23C5 /* OpenGL */ = {
 			isa = PBXGroup;
 			children = (
-				95CC9C92224F8994001E23C5 /* OpenGLView.h */,
-				95CC9C93224F8994001E23C5 /* OpenGLProgram.h */,
-				95CC9C94224F8994001E23C5 /* OpenGLContext.m */,
-				95CC9C95224F8994001E23C5 /* OpenGLRender.h */,
-				95CC9C96224F8995001E23C5 /* OpenGLView.m */,
-				95CC9C97224F8995001E23C5 /* OpenGLRender.m */,
 				95CC9C98224F8995001E23C5 /* OpenGLContext.h */,
+				95CC9C94224F8994001E23C5 /* OpenGLContext.m */,
+				95CC9C93224F8994001E23C5 /* OpenGLProgram.h */,
 				95CC9C99224F8995001E23C5 /* OpenGLProgram.m */,
+				95CC9C95224F8994001E23C5 /* OpenGLRender.h */,
+				95CC9C97224F8995001E23C5 /* OpenGLRender.m */,
+				95CC9C92224F8994001E23C5 /* OpenGLView.h */,
+				95CC9C96224F8995001E23C5 /* OpenGLView.m */,
 			);
 			path = OpenGL;
 			sourceTree = "<group>";

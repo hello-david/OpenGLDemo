@@ -20,12 +20,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    self.glView = [[OpenGLView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-//    [self.view addSubview:self.glView];
+    self.glView = [[OpenGLView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [self.view addSubview:self.glView];
     
-    self.glkView = [[GLKView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) context:[[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1]];
-    self.glkView.delegate = self;
-    [self.view addSubview:self.glkView];
+//    self.glkView = [[GLKView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) context:[[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1]];
+//    self.glkView.delegate = self;
+//    [self.view addSubview:self.glkView];
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
