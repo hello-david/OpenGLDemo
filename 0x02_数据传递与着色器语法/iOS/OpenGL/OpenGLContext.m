@@ -16,7 +16,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        self.eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+        self.eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
         [EAGLContext setCurrentContext:self.eaglContext];
     }
     return self;

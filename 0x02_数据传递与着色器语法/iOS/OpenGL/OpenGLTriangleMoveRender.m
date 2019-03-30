@@ -52,11 +52,12 @@ static GLKVector3 movementVectors[3] = {
 }
 
 - (void)render:(CGSize)size {
-    // 当前上下文使用该渲染管线
-    [self.program use];
-    
     // 定义裁剪空间转换到屏幕上的空间大小
     glViewport(0, 0, size.width, size.height);
+    
+    // VBO数据传输示例
+    // 当前上下文使用该渲染管线
+    [self.program use];
     
     // 更新VBO的数值
     [self updateAnimatedVertexPositions];
@@ -64,7 +65,6 @@ static GLKVector3 movementVectors[3] = {
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     
     glEnableVertexAttribArray(self.positionAttribute);
-    
     /**
      *  glVertexAttribPointer最后一个参数ptr指针的含义：
      *  在不使用VBO的情况下：ptr就是一个指针，指向的是需要上传到顶点数据指针。通常是数组名的偏移量。
