@@ -13,8 +13,8 @@
 		95426F872146BB4300A4BC2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95426F862146BB4300A4BC2E /* Assets.xcassets */; };
 		95426F8A2146BB4300A4BC2E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95426F882146BB4300A4BC2E /* LaunchScreen.storyboard */; };
 		95426F8D2146BB4300A4BC2E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 95426F8C2146BB4300A4BC2E /* main.m */; };
-		95F4917A214FA28F00E30B75 /* OpenGLKView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F49177214FA28F00E30B75 /* OpenGLKView.m */; };
-		95F4917B214FA28F00E30B75 /* OpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F49179214FA28F00E30B75 /* OpenGLView.m */; };
+		95CC9CA3224F89AC001E23C5 /* OpenGLKView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CC9C9F224F89AC001E23C5 /* OpenGLKView.m */; };
+		95CC9CA4224F89AC001E23C5 /* OpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CC9CA2224F89AC001E23C5 /* OpenGLView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,10 +28,10 @@
 		95426F892146BB4300A4BC2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95426F8B2146BB4300A4BC2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95426F8C2146BB4300A4BC2E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		95F49176214FA28F00E30B75 /* OpenGLKView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLKView.h; sourceTree = "<group>"; };
-		95F49177214FA28F00E30B75 /* OpenGLKView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLKView.m; sourceTree = "<group>"; };
-		95F49178214FA28F00E30B75 /* OpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLView.h; sourceTree = "<group>"; };
-		95F49179214FA28F00E30B75 /* OpenGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLView.m; sourceTree = "<group>"; };
+		95CC9C9F224F89AC001E23C5 /* OpenGLKView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLKView.m; sourceTree = "<group>"; };
+		95CC9CA0224F89AC001E23C5 /* OpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLView.h; sourceTree = "<group>"; };
+		95CC9CA1224F89AC001E23C5 /* OpenGLKView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLKView.h; sourceTree = "<group>"; };
+		95CC9CA2224F89AC001E23C5 /* OpenGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +48,7 @@
 		95426F712146BB4200A4BC2E = {
 			isa = PBXGroup;
 			children = (
+				95CC9C9E224F89AC001E23C5 /* OpenGL */,
 				95426F7C2146BB4200A4BC2E /* OpenGLDemo */,
 				95426F7B2146BB4200A4BC2E /* Products */,
 			);
@@ -64,7 +65,6 @@
 		95426F7C2146BB4200A4BC2E /* OpenGLDemo */ = {
 			isa = PBXGroup;
 			children = (
-				95F49175214FA28F00E30B75 /* OpenGL */,
 				95426F7D2146BB4200A4BC2E /* AppDelegate.h */,
 				95426F7E2146BB4200A4BC2E /* AppDelegate.m */,
 				95426F802146BB4200A4BC2E /* ViewController.h */,
@@ -78,16 +78,16 @@
 			path = OpenGLDemo;
 			sourceTree = "<group>";
 		};
-		95F49175214FA28F00E30B75 /* OpenGL */ = {
+		95CC9C9E224F89AC001E23C5 /* OpenGL */ = {
 			isa = PBXGroup;
 			children = (
-				95F49176214FA28F00E30B75 /* OpenGLKView.h */,
-				95F49177214FA28F00E30B75 /* OpenGLKView.m */,
-				95F49178214FA28F00E30B75 /* OpenGLView.h */,
-				95F49179214FA28F00E30B75 /* OpenGLView.m */,
+				95CC9C9F224F89AC001E23C5 /* OpenGLKView.m */,
+				95CC9CA0224F89AC001E23C5 /* OpenGLView.h */,
+				95CC9CA1224F89AC001E23C5 /* OpenGLKView.h */,
+				95CC9CA2224F89AC001E23C5 /* OpenGLView.m */,
 			);
 			path = OpenGL;
-			sourceTree = SOURCE_ROOT;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -162,8 +162,8 @@
 				95426F822146BB4200A4BC2E /* ViewController.m in Sources */,
 				95426F8D2146BB4300A4BC2E /* main.m in Sources */,
 				95426F7F2146BB4200A4BC2E /* AppDelegate.m in Sources */,
-				95F4917A214FA28F00E30B75 /* OpenGLKView.m in Sources */,
-				95F4917B214FA28F00E30B75 /* OpenGLView.m in Sources */,
+				95CC9CA3224F89AC001E23C5 /* OpenGLKView.m in Sources */,
+				95CC9CA4224F89AC001E23C5 /* OpenGLView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

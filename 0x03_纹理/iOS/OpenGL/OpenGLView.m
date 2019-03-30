@@ -10,7 +10,6 @@
 #import "OpenGLContext.h"
 #import "OpenGLRender.h"
 #import "OpenGLTextureRender.h"
-#import "OpenGLTriangleMoveRender.h"
 
 @interface OpenGLView()
 @property (nonatomic, assign) GLuint framebuffer;

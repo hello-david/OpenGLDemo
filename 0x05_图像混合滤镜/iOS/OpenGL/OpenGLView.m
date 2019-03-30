@@ -9,9 +9,6 @@
 #import "OpenGLView.h"
 #import "OpenGLContext.h"
 #import "OpenGLRender.h"
-#import "OpenGLTextureRender.h"
-#import "OpenGLTriangleMoveRender.h"
-#import "OpenGLSimpleRender.h"
 #import "OpenGLTextureBlendingRender.h"
 
 @interface OpenGLView()

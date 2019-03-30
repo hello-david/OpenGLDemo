@@ -55,26 +55,39 @@ static GLKVector3 movementVectors[3] = {
     // 定义裁剪空间转换到屏幕上的空间大小
     glViewport(0, 0, size.width, size.height);
     
-    // VBO数据传输示例
     // 当前上下文使用该渲染管线
     [self.program use];
     
-    // 更新VBO的数值
-    [self updateAnimatedVertexPositions];
-    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    // VBO数据传输示例
+    {
+        // 更新VBO的数值
+        [self updateAnimatedVertexPositions];
+        glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        
+        /**
+         *  glVertexAttribPointer最后一个参数ptr指针的含义：
+         *  在不使用VBO的情况下：ptr就是一个指针，指向的是需要上传到顶点数据指针。通常是数组名的偏移量。
+         *  在使用VBO的情况下：首先要glBindBuffer，以后ptr指向的就不是具体的数据了。这里的ptr指向的是缓冲区数据的偏移量。
+         **/
+        glEnableVertexAttribArray(self.positionAttribute);
+        glVertexAttribPointer(self.positionAttribute, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+        
+        // 使用三角形图元绘制
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
+        glDisableVertexAttribArray(self.positionAttribute);
+    }
     
-    glEnableVertexAttribArray(self.positionAttribute);
-    /**
-     *  glVertexAttribPointer最后一个参数ptr指针的含义：
-     *  在不使用VBO的情况下：ptr就是一个指针，指向的是需要上传到顶点数据指针。通常是数组名的偏移量。
-     *  在使用VBO的情况下：首先要glBindBuffer，以后ptr指向的就不是具体的数据了。这里的ptr指向的是缓冲区数据的偏移量。
-     **/
-    glVertexAttribPointer(self.positionAttribute, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    // VAO数据传输示例
+    {
+        
+    }
     
-    // 使用三角形图元绘制
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
-    glDisableVertexAttribArray(self.positionAttribute);
+    
+    // EBO数据传输示例
+    {
+        
+    }
 }
 
 - (void)updateAnimatedVertexPositions {

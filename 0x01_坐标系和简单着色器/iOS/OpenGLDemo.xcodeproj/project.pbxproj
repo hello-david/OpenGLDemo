@@ -13,10 +13,10 @@
 		95426F872146BB4300A4BC2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95426F862146BB4300A4BC2E /* Assets.xcassets */; };
 		95426F8A2146BB4300A4BC2E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95426F882146BB4300A4BC2E /* LaunchScreen.storyboard */; };
 		95426F8D2146BB4300A4BC2E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 95426F8C2146BB4300A4BC2E /* main.m */; };
-		95BDCB4B21631DBD00450F09 /* OpenGLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BDCB4A21631DBD00450F09 /* OpenGLProgram.m */; };
-		95BDCB4E21631DD300450F09 /* OpenGLContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BDCB4D21631DD300450F09 /* OpenGLContext.m */; };
-		95BDCB5121631DE800450F09 /* OpenGLRender.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BDCB5021631DE800450F09 /* OpenGLRender.m */; };
-		95F4917B214FA28F00E30B75 /* OpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F49179214FA28F00E30B75 /* OpenGLView.m */; };
+		95CC9C9A224F8995001E23C5 /* OpenGLContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CC9C94224F8994001E23C5 /* OpenGLContext.m */; };
+		95CC9C9B224F8995001E23C5 /* OpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CC9C96224F8995001E23C5 /* OpenGLView.m */; };
+		95CC9C9C224F8995001E23C5 /* OpenGLRender.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CC9C97224F8995001E23C5 /* OpenGLRender.m */; };
+		95CC9C9D224F8995001E23C5 /* OpenGLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CC9C99224F8995001E23C5 /* OpenGLProgram.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,14 +30,14 @@
 		95426F892146BB4300A4BC2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95426F8B2146BB4300A4BC2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95426F8C2146BB4300A4BC2E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		95BDCB4921631DBD00450F09 /* OpenGLProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLProgram.h; sourceTree = "<group>"; };
-		95BDCB4A21631DBD00450F09 /* OpenGLProgram.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenGLProgram.m; sourceTree = "<group>"; };
-		95BDCB4C21631DD300450F09 /* OpenGLContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLContext.h; sourceTree = "<group>"; };
-		95BDCB4D21631DD300450F09 /* OpenGLContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenGLContext.m; sourceTree = "<group>"; };
-		95BDCB4F21631DE800450F09 /* OpenGLRender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLRender.h; sourceTree = "<group>"; };
-		95BDCB5021631DE800450F09 /* OpenGLRender.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenGLRender.m; sourceTree = "<group>"; };
-		95F49178214FA28F00E30B75 /* OpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLView.h; sourceTree = "<group>"; };
-		95F49179214FA28F00E30B75 /* OpenGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLView.m; sourceTree = "<group>"; };
+		95CC9C92224F8994001E23C5 /* OpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLView.h; sourceTree = "<group>"; };
+		95CC9C93224F8994001E23C5 /* OpenGLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLProgram.h; sourceTree = "<group>"; };
+		95CC9C94224F8994001E23C5 /* OpenGLContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLContext.m; sourceTree = "<group>"; };
+		95CC9C95224F8994001E23C5 /* OpenGLRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLRender.h; sourceTree = "<group>"; };
+		95CC9C96224F8995001E23C5 /* OpenGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLView.m; sourceTree = "<group>"; };
+		95CC9C97224F8995001E23C5 /* OpenGLRender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLRender.m; sourceTree = "<group>"; };
+		95CC9C98224F8995001E23C5 /* OpenGLContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLContext.h; sourceTree = "<group>"; };
+		95CC9C99224F8995001E23C5 /* OpenGLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLProgram.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +54,7 @@
 		95426F712146BB4200A4BC2E = {
 			isa = PBXGroup;
 			children = (
+				95CC9C91224F8994001E23C5 /* OpenGL */,
 				95426F7C2146BB4200A4BC2E /* OpenGLDemo */,
 				95426F7B2146BB4200A4BC2E /* Products */,
 			);
@@ -70,7 +71,6 @@
 		95426F7C2146BB4200A4BC2E /* OpenGLDemo */ = {
 			isa = PBXGroup;
 			children = (
-				95F49175214FA28F00E30B75 /* OpenGL */,
 				95426F7D2146BB4200A4BC2E /* AppDelegate.h */,
 				95426F7E2146BB4200A4BC2E /* AppDelegate.m */,
 				95426F802146BB4200A4BC2E /* ViewController.h */,
@@ -84,20 +84,20 @@
 			path = OpenGLDemo;
 			sourceTree = "<group>";
 		};
-		95F49175214FA28F00E30B75 /* OpenGL */ = {
+		95CC9C91224F8994001E23C5 /* OpenGL */ = {
 			isa = PBXGroup;
 			children = (
-				95F49178214FA28F00E30B75 /* OpenGLView.h */,
-				95F49179214FA28F00E30B75 /* OpenGLView.m */,
-				95BDCB4921631DBD00450F09 /* OpenGLProgram.h */,
-				95BDCB4A21631DBD00450F09 /* OpenGLProgram.m */,
-				95BDCB4C21631DD300450F09 /* OpenGLContext.h */,
-				95BDCB4D21631DD300450F09 /* OpenGLContext.m */,
-				95BDCB4F21631DE800450F09 /* OpenGLRender.h */,
-				95BDCB5021631DE800450F09 /* OpenGLRender.m */,
+				95CC9C92224F8994001E23C5 /* OpenGLView.h */,
+				95CC9C93224F8994001E23C5 /* OpenGLProgram.h */,
+				95CC9C94224F8994001E23C5 /* OpenGLContext.m */,
+				95CC9C95224F8994001E23C5 /* OpenGLRender.h */,
+				95CC9C96224F8995001E23C5 /* OpenGLView.m */,
+				95CC9C97224F8995001E23C5 /* OpenGLRender.m */,
+				95CC9C98224F8995001E23C5 /* OpenGLContext.h */,
+				95CC9C99224F8995001E23C5 /* OpenGLProgram.m */,
 			);
 			path = OpenGL;
-			sourceTree = SOURCE_ROOT;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -169,13 +169,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95CC9C9D224F8995001E23C5 /* OpenGLProgram.m in Sources */,
+				95CC9C9C224F8995001E23C5 /* OpenGLRender.m in Sources */,
+				95CC9C9A224F8995001E23C5 /* OpenGLContext.m in Sources */,
 				95426F822146BB4200A4BC2E /* ViewController.m in Sources */,
-				95BDCB4E21631DD300450F09 /* OpenGLContext.m in Sources */,
 				95426F8D2146BB4300A4BC2E /* main.m in Sources */,
 				95426F7F2146BB4200A4BC2E /* AppDelegate.m in Sources */,
-				95F4917B214FA28F00E30B75 /* OpenGLView.m in Sources */,
-				95BDCB5121631DE800450F09 /* OpenGLRender.m in Sources */,
-				95BDCB4B21631DBD00450F09 /* OpenGLProgram.m in Sources */,
+				95CC9C9B224F8995001E23C5 /* OpenGLView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
