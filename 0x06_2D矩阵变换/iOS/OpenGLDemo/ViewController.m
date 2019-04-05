@@ -9,7 +9,6 @@
 #import "ViewController.h"
 #import "OpenGLView.h"
 #import <CoreMedia/CoreMedia.h>
-#import "OpenGLSimpleRender.h"
 
 @interface ViewController ()
 @property (nonatomic, strong) OpenGLView *glView;
@@ -25,11 +24,6 @@
     [self.view addSubview:self.glView];
     [self.view sendSubviewToBack:self.glView];
     self.slider.alpha = 0;
-}
-
-- (IBAction)sliderValueChange:(id)sender {
-    OpenGLSimpleRender *simpleRender = [self.glView valueForKey:@"render"];
-    [simpleRender setEffectPercent:((UISlider *)sender).value];
 }
 
 @end

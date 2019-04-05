@@ -9,13 +9,13 @@
 #import "OpenGLView.h"
 #import "OpenGLContext.h"
 #import "OpenGLRender.h"
-#import "OpenGLTextureBlendingRender.h"
+#import "OpenGLMartixRender.h"
 
 @interface OpenGLView()
 @property (nonatomic, assign) GLuint framebuffer;
 @property (nonatomic, assign) GLuint renderbuffer;
 
-@property (nonatomic, strong) OpenGLTextureBlendingRender *render;
+@property (nonatomic, strong) OpenGLMartixRender *render;
 @property (nonatomic, strong) OpenGLContext *context;
 @property (nonatomic, strong) CAEAGLLayer *eaglLayer;
 
@@ -54,7 +54,7 @@
 - (void)commonInit {
     self.eaglLayer = (CAEAGLLayer *)self.layer;
     self.context = [[OpenGLContext alloc] init];
-    self.render = [[OpenGLTextureBlendingRender alloc] init];
+    self.render = [[OpenGLMartixRender alloc] init];
     
     self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(displayLinkUpdete)];
     [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];

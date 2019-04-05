@@ -34,7 +34,14 @@ NSString *const kFragmentShaderString = SHADER_STRING
 @implementation OpenGLRender
 
 - (instancetype)init {
-    return [self initWithVertex:kVertexShaderString fragment:kFragmentShaderString];
+    self = [self initWithVertex:kVertexShaderString fragment:kFragmentShaderString];
+    
+    // 给Program添加属性(shader脚本中定义好的变量)，默认脚本中使用三个变量
+    self.positionAttribute = [self.program attributeIndex:@"position"];
+    self.inputTextureCoorAttribute = [self.program attributeIndex:@"inputTextureCoordinate"];
+    self.textureUniform = [self.program uniformIndex:@"inputTexture"];
+    
+    return self;
 }
 
 - (instancetype)initWithVertex:(NSString *)vertex fragment:(NSString *)fragment {
@@ -47,11 +54,6 @@ NSString *const kFragmentShaderString = SHADER_STRING
             NSLog(@"Fragment shader compile log:%@",self.program.fragmentShaderLog);
             assert(false);
         }
-        
-        // 给Program添加属性(shader脚本中定义好的变量)，默认脚本中使用三个变量
-        self.positionAttribute = [self.program attributeIndex:@"position"];
-        self.inputTextureCoorAttribute = [self.program attributeIndex:@"inputTextureCoordinate"];
-        self.textureUniform = [self.program uniformIndex:@"inputTexture"];
     }
     return self;
 }
