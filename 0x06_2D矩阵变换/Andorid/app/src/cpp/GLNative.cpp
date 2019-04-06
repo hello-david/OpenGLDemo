@@ -6,6 +6,7 @@
 #include <jni.h>
 #include <android/native_window_jni.h>
 #include "GLNative.hpp"
+#include "GLMatrixRender.hpp"
 
 #ifdef __cplusplus
 extern "C"{
@@ -161,7 +162,7 @@ void Java_com_example_david_a0x00_OpenGLProgram_validate__J(JNIEnv *env, jobject
 
 // ------------- Render
 jlong Java_com_example_david_a0x00_OpenGLRender_createRender(JNIEnv *env, jobject instance) {
-    GLDemo::GLTriangleRender *glRender = new GLDemo::GLTriangleRender();
+    GLDemo::GLMatrixRender *glRender = new GLDemo::GLMatrixRender();
     return reinterpret_cast<long>(glRender);
 }
 

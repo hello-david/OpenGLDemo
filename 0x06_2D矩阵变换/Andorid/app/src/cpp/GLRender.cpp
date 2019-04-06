@@ -44,7 +44,10 @@ const char *kFragmentForTextureShader = R"(
 
 
 GLRender::GLRender() : GLRender(kVertexShader, kFragmentShader) {
-
+    // 给Program添加属性(shader脚本中定义好的变量)，默认脚本中使用三个变量
+    mPositionAttribute = (GLuint)mProgram->attributeIndex("position");
+    mInputTextureCoorAttribute = (GLuint)mProgram->attributeIndex("inputTextureCoordinate");
+    mTextureUniform = (GLuint)mProgram->uniformIndex("inputTexture");
 }
 
 GLRender::GLRender(const std::string &vertexStr, const std::string &fragmentStr) {
@@ -59,11 +62,6 @@ GLRender::GLRender(const std::string &vertexStr, const std::string &fragmentStr)
         mProgram = NULL;
         assert(false);
     }
-
-    // 给Program添加属性(shader脚本中定义好的变量)，默认脚本中使用三个变量
-    mPositionAttribute = (GLuint)mProgram->attributeIndex("position");
-    mInputTextureCoorAttribute = (GLuint)mProgram->attributeIndex("inputTextureCoordinate");
-    mTextureUniform = (GLuint)mProgram->uniformIndex("inputTexture");
 }
 
 GLRender::~GLRender() {

@@ -11,7 +11,7 @@ public class OpenGLRender {
     private long mNativeRender;
 
     OpenGLRender() {
-        mNativeRender = createRenderWithTwoTexture(getResource("texture1.jpg"), getResource("texture3.png"));
+        mNativeRender = createRender();
     };
 
     private String getResource(String fileName) {
